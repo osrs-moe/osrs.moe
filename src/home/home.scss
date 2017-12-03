@@ -1,0 +1,11 @@
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  &>div {
+    max-width: 500px;
+    text-align: center;
+  }
+}
