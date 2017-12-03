@@ -73,7 +73,7 @@ function draw_text(ctx: CanvasRenderingContext2D, x: number, y: number, max_widt
 }
 
 
-function draw(ctx: CanvasRenderingContext2D, redraw = true) {
+function draw(ctx: CanvasRenderingContext2D, redraw = false) {
 	if (ctx == null) {
 		return;
 	}
@@ -143,7 +143,7 @@ function draw(ctx: CanvasRenderingContext2D, redraw = true) {
 
 
 	if (redraw) {
-		setTimeout(draw, 1000 / fps);
+		setTimeout(draw, 1000 / fps, ctx, true);
 	}
 }
 
