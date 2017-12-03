@@ -34,7 +34,7 @@ module.exports = {
 		new ExtractTextPlugin("assets/style.[chunkhash].css"),
 		new CleanWebpackPlugin([DIST_PATH], {root: ROOT_PATH}),
 		new HtmlWebpackPlugin({
-			title: "Output Management"
+			title: "osrs.moe"
 		}),
 		new CopyWebpackPlugin(['static'])
 	],
