@@ -34,7 +34,17 @@ module.exports = {
 		new ExtractTextPlugin("assets/style.[chunkhash].css"),
 		new CleanWebpackPlugin([DIST_PATH], {root: ROOT_PATH}),
 		new HtmlWebpackPlugin({
-			title: "osrs.moe"
+			inject: false,
+			template: require('html-webpack-template'),
+			lang: "en",
+			mobile: true,
+			title: "osrs.moe",
+			meta: [
+				{
+					name: "description",
+					content: "A qt little site to help with tools for Oldschool RuneScape."
+				}
+			]
 		}),
 		new CopyWebpackPlugin(['static'])
 	],
