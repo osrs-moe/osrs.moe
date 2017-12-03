@@ -147,5 +147,7 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
 	}
 }
 
-export const resize_canvas: EventListenerOrEventListenerObject = {handleEvent() { debounce(size_canvas, 50)}};
+const resize_limiter = debounce(size_canvas, 50);
+
+export const resize_canvas: EventListener = () => resize_limiter();
 export const start = () => size_canvas(true);
