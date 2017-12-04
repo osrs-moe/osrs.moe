@@ -8,7 +8,7 @@ export default {
 				m("a.logo", {href: "/", oncreate: m.route.link}, "osrs.moe"),
 				m("a.button", {href: "/farmclock", oncreate: m.route.link}, "Farm Clock")
 			]),
-			vnode.children
+			m("main", [vnode.children])
 		]);
 	}
 };
