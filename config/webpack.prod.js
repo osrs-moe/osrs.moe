@@ -9,10 +9,5 @@ module.exports = merge(common, {
 		new UglifyJSPlugin({
 			parallel: true
 		})
-	],
-	devServer: {
-		contentBase: "./dist",
-		port: 8080,
-		historyApiFallback: true
-	}
+	]
 });
