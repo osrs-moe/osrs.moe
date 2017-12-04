@@ -27,7 +27,7 @@ module.exports = {
 	},
 	resolve: {
 		extensions: [".tsx", ".ts", ".js"],
-		modules: ['node_modules', 'src'],
+		modules: ["node_modules", "src"],
 		alias: {"mini-dark$": path.resolve(ROOT_PATH, "node_modules", "mini.css", "src", "flavors", "mini-dark.scss")}
 	},
 	plugins: [
@@ -35,7 +35,7 @@ module.exports = {
 		new CleanWebpackPlugin([DIST_PATH], {root: ROOT_PATH}),
 		new HtmlWebpackPlugin({
 			inject: false,
-			template: require('html-webpack-template'),
+			template: require("html-webpack-template"),
 			lang: "en",
 			mobile: true,
 			title: "osrs.moe",
@@ -46,7 +46,7 @@ module.exports = {
 				}
 			]
 		}),
-		new CopyWebpackPlugin(['static'])
+		new CopyWebpackPlugin(["static"])
 	],
 	output: {
 		filename: "assets/bundle.[chunkhash].js",
