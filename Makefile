@@ -11,5 +11,8 @@ build:
 	@echo Compressing Stylesheets.
 	find dist/ -iname '*.css' -print0 | xargs -0 zopfli
 
+stage: build
+	rsync -rhcP --delete dist/ osrsmoe:/srv/osrs.moe_staging
+
 deploy: build
-	rsync -rhP --delete
+	rsync -rhcP --delete dist/ osrsmoe:/srv/osrs.moe/
