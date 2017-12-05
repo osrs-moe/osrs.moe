@@ -68,6 +68,7 @@ export default {
 	onremove() {
 		clearInterval(this.timer_updater);
 		window.removeEventListener("resize", farmclock.resize_canvas, true);
+		farmclock.stop();
 	},
 	view() {
 		return m(".farmclock", [

@@ -1,6 +1,8 @@
 import plant_data from "./plant_data";
 import debounce from "lodash-es/debounce";
 
+let run = false;
+
 const _second = 1000;
 const _minute = _second * 60;
 const fps = 60;
@@ -142,7 +144,7 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
 	draw_line(ctx, 0, bars_height, width, bars_height, grid_color);
 
 
-	if (redraw) {
+	if (redraw && run) {
 		setTimeout(draw, 1000 / fps, ctx, true);
 	}
 }
@@ -150,4 +152,8 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
 const resize_limiter = debounce(size_canvas, 50);
 
 export const resize_canvas: EventListener = () => resize_limiter();
-export const start = () => size_canvas(true);
+export const start = () => {
+	run = true;
+	size_canvas(true);
+};
+export const stop = () => run = false;
