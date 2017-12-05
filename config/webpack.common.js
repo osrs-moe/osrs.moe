@@ -44,7 +44,11 @@ module.exports = {
 					name: "description",
 					content: "A qt little site to help with tools for Oldschool RuneScape."
 				}
-			]
+			],
+			minify: {
+				collapseWhitespace: true,
+				removeComments: true,
+			}
 		}),
 		new CopyWebpackPlugin(["static"])
 	],
