@@ -36,6 +36,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			inject: false,
 			template: require("html-webpack-template"),
+			baseHref: "/",
 			lang: "en",
 			mobile: true,
 			title: "osrs.moe",
