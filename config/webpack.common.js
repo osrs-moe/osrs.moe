@@ -1,5 +1,4 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -33,27 +32,6 @@ module.exports = {
 	plugins: [
 		new ExtractTextPlugin("assets/style.[chunkhash].css"),
 		new CleanWebpackPlugin([DIST_PATH], {root: ROOT_PATH}),
-		new HtmlWebpackPlugin({
-			inject: false,
-			template: require("html-webpack-template"),
-			lang: "en",
-			mobile: true,
-			title: "osrs.moe",
-			meta: [
-				{
-					name: "description",
-					content: "A qt little site to help with tools for Oldschool RuneScape."
-				}
-			],
-			minify: {
-				collapseWhitespace: true,
-				removeComments: true,
-			},
-			googleAnalytics: {
-				trackingId: "UA-110688108-1",
-				pageViewOnLoad: true
-			}
-		}),
 		new CopyWebpackPlugin(["static"])
 	],
 	output: {
