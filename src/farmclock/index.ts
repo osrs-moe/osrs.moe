@@ -73,7 +73,7 @@ export default {
 		return m(".farmclock", [
 			m("canvas#farmclock_canvas"),
 			m(".plantdata", [
-				m("table", [
+				m("table.preset", [
 					m("thead", [
 						m("tr", [
 							m("td", "Plants"),
