@@ -48,10 +48,6 @@ module.exports = {
 			minify: {
 				collapseWhitespace: true,
 				removeComments: true,
-			},
-			googleAnalytics: {
-				trackingId: "UA-110688108-1",
-				pageViewOnLoad: true
 			}
 		}),
 		new CopyWebpackPlugin(["static"])
