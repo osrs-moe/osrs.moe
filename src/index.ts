@@ -15,5 +15,21 @@ m.route(document.body, "/", {
 		render() {
 			return m(Layout, m(Farmclock));
 		}
-	}
+	},
+	"/:path...": {
+		render() {
+			return m(Layout, m({
+				view() {
+					return m(".welcome", [
+						m("h1", "Page Not Found :("),
+						m("p", [
+							m("a", {href: "/", oncreate: m.route.link}, "Click here"),
+							" to go back home.  Otherwise, if you are looking for the farmclock, it's been relocated to ",
+							m("a", {href: "/farmclock", oncreate: m.route.link}, "https://osrs.moe/farmclock")
+						])
+					]);
+				}
+			}));
+		}
+	},
 });
