@@ -10,6 +10,8 @@ build:
 	find dist/ -iname '*.js' -print0 | xargs -0 zopfli
 	@echo Compressing Stylesheets.
 	find dist/ -iname '*.css' -print0 | xargs -0 zopfli
+	@echo Compressing index.html.
+	zopfli dist/index.html
 
 stage: build
 	rsync -rhcP --delete dist/ osrsmoe:/srv/osrs.moe_staging
