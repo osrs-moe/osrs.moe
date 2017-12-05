@@ -12,6 +12,11 @@ export default {
 				" since indecentcode's went down."
 			]),
 			m("p", [
+				"This project is ",
+				m("a", {href: "https://github.com/osrs-moe/osrs_moe"}, "open source"),
+				"."
+			]),
+			m("p", [
 				"-bitwise | ",
 				m("a", {href: "https://twitter.com/buttwize"}, "@buttwize")
 			])
