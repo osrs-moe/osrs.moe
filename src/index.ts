@@ -16,7 +16,7 @@ m.route(document.body, "/", {
 			return m(Layout, m(Farmclock));
 		}
 	},
-	"/:path...": {
+	"/:404...": {
 		render() {
 			return m(Layout, m({
 				view() {
