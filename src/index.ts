@@ -21,7 +21,10 @@ m.route(document.body, "/", {
 			return m(Layout, m({
 				view() {
 					return m(".welcome", [
-						m("h1", "Page Not Found :("),
+						m("h1", [
+							"Page Not Found :(",
+							m("small", m.route.get())
+						]),
 						m("p", [
 							m("a", {href: "/", oncreate: m.route.link}, "Click here"),
 							" to go back home.  Otherwise, if you are looking for the farmclock, it's been relocated to ",
