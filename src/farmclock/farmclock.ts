@@ -104,7 +104,7 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
 		const x = left_edge + pixels_per_slot * i;
 
 		for (let ii = 0; ii < plant_data.length; ii++) {
-			if ((ms_since_midnight % plant_data[ii].interval) >= slot_size) {
+			if (Math.abs(ms_since_midnight % plant_data[ii].interval) >= slot_size) {
 				continue;
 			}
 
