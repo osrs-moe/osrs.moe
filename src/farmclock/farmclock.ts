@@ -1,5 +1,5 @@
 import plant_data from "./plant_data";
-import debounce from "lodash-es/debounce";
+import {debounce} from "lodash";
 
 let run = false;
 

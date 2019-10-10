@@ -6,34 +6,57 @@
   "author": "bitwise",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config config/webpack.prod.js",
-    "build:dev": "webpack --config config/webpack.dev.js",
-    "serve": "webpack-dev-server --host 0.0.0.0 --config config/webpack.dev.js"
-  },
-  "devDependencies": {
-    "@types/lodash-es": "^4.17.0",
-    "@types/mithril": "^1.1.12",
-    "clean-webpack-plugin": "^0.1.17",
-    "copy-webpack-plugin": "^4.2.3",
-    "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "html-critical-webpack-plugin": "^1.0.1",
-    "html-webpack-plugin": "^2.30.1",
-    "html-webpack-template": "^6.1.0",
-    "node-sass": "^4.7.2",
-    "optimize-css-assets-webpack-plugin": "^3.2.0",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
-    "ts-loader": "^3.2.0",
-    "typescript": "^2.6.2",
-    "uglifyjs-webpack-plugin": "^1.1.2",
-    "webpack": "^3.9.1",
-    "webpack-dev-server": "^2.9.5",
-    "webpack-merge": "^4.1.1"
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "serve": "webpack-dev-server --progress --history-api-fallback",
+    "format": "prettier --write webpack.config.js \"./src/**/*.ts\""
   },
   "dependencies": {
-    "lodash-es": "^4.17.4",
+    "core-js": "^3.2.1",
+    "lodash": "^4.17.15",
     "mini.css": "^2.3.7",
     "mithril": "^1.1.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@types/lodash": "^4.14.144",
+    "@types/mithril": "^1.1.12",
+    "autoprefixer": "^9.6.4",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
+    "html-webpack-inline-runtime-plugin": "^1.1.0",
+    "html-webpack-plugin": "^4.0.0-beta.8",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.18.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  },
+  "browserslist": [
+    ">0.25%",
+    "not ie 11",
+    "not op_mini all"
+  ],
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": false,
+          "useBuiltIns": "usage",
+          "corejs": 3
+        }
+      ]
+    ]
   }
 }

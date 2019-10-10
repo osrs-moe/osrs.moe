@@ -1,8 +1,8 @@
-import "mini-dark"; // import main mini.css dark theme
-import * as m from "mithril";
-import Layout from "./layout";
-import Home from "./home";
-import Farmclock from "./farmclock";
+import m from "mithril";
+import Layout from "./layout/index";
+import Home from "./home/index";
+import Farmclock from "./farmclock/index";
+import "./style.scss"
 
 m.route.prefix("");
 m.route(document.body, "/", {

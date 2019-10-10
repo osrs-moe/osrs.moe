@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import plant_data, {PlantData} from "./plant_data";
 import "./farmclock.scss";
 import * as farmclock from "./farmclock";
@@ -47,7 +47,7 @@ function get_window_time_difference(interval: number) {
 }
 
 interface State {
-	timer_updater: number,
+	timer_updater: NodeJS.Timeout,
 	interval_timers: TimerIntervals,
 }
 

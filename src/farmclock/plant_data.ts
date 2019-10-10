@@ -6,10 +6,10 @@ export interface PlantData {
 	interval: number;
 	interval_description: string;
 	color: string;
-	plants: [{
+	plants: {
 		name: string,
 		windows: number
-	}]
+	}[]
 }
 
 //["#a55ca5", "#67b6c7", "#bccd7a", "#eb9743", '#ff24f2']
