@@ -59,7 +59,7 @@ module.exports = (_, opts) => {
       dev ? null : new CleanWebpackPlugin(),
       new webpack.HashedModuleIdsPlugin(),
       dev ? null : new CssExtract(),
-      new HtmlPlugin(),
+      new HtmlPlugin({ title: "osrs.moe" }),
       dev ? null : new HtmlRuntimePlugin()
     ].filter(Boolean)
   };
