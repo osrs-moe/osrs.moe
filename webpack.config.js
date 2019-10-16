@@ -4,10 +4,12 @@ const CssExtract = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
 const HtmlRuntimePlugin = require("html-webpack-inline-runtime-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const PATHS = {
   src: path.resolve(__dirname, "src"),
-  dist: path.resolve(__dirname, "dist")
+  dist: path.resolve(__dirname, "dist"),
+  static: path.resolve(__dirname, "static")
 };
 
 const URIS = {
@@ -60,7 +62,8 @@ module.exports = (_, opts) => {
       new webpack.HashedModuleIdsPlugin(),
       dev ? null : new CssExtract(),
       new HtmlPlugin({ title: "osrs.moe" }),
-      dev ? null : new HtmlRuntimePlugin()
+      dev ? null : new HtmlRuntimePlugin(),
+      dev ? null : new CopyPlugin([{ from: PATHS.static, to: PATHS.dist }])
     ].filter(Boolean)
   };
 };
