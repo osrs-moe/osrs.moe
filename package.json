@@ -9,7 +9,7 @@
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "serve": "webpack-dev-server --progress --history-api-fallback",
-    "format": "prettier --write webpack.config.js \"./src/**/*.ts\""
+    "format": "prettier --write webpack.config.js \"./src/**/*.ts\" \"./src/**/*.css\""
   },
   "dependencies": {
     "core-js": "^3.2.1",

@@ -1,14 +1,10 @@
 import m from "mithril";
-const Link = m.route.Link;
-import "./layout.css";
+import { Header } from "./Header";
 
 export const Layout = {
   view: (vnode: m.Vnode) =>
-    m(".layout", [
-      m("header", [
-        m(Link, { href: "/", class: "logo" }, "osrs.moe"),
-        m(Link, { href: "/farmclock", class: "button" }, "Farm Clock")
-      ]),
-      m("section", vnode.children)
+    m(".flex.flex-col.h-full", [
+      m(Header),
+      m("section.flex.h-full", vnode.children)
     ])
 };

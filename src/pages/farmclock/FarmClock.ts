@@ -1,6 +1,5 @@
 import m from "mithril";
 import plant_data, { PlantData } from "./plant_data";
-import "./farmclock.css";
 import * as farmclock from "./logic";
 
 const _second = 1000;
@@ -76,20 +75,20 @@ export default {
     farmclock.stop();
   },
   view() {
-    return m(".farmclock", [
+    return m(".flex.flex-col.items-center", [
       m("canvas#farmclock_canvas"),
-      m(".plantdata", [
-        m("table.preset", [
-          m("thead", [
-            m("tr", [
-              m("td", "Plants"),
-              m("td", "Growth Window Time"),
-              m("td", "Growth Windows"),
-              m("td", "Time to Next Window")
+      m(".flex-1.flex.items-center", [
+        m("table.text-center.my-auto", [
+          m("thead.text-gray-400", [
+            m(`tr`, [
+              m(`td.p-4`, "Plants"),
+              m(`td.p-4`, "Growth Window Time"),
+              m(`td.p-4`, "Growth Windows"),
+              m(`td.p-4`, "Time to Next Window")
             ])
           ]),
           m(
-            "tbody",
+            "tbody.text-gray-900",
             plant_data
               .slice()
               .reverse()
@@ -97,22 +96,25 @@ export default {
                 data.plants
                   .slice()
                   .reverse()
-                  .map(plant =>
-                    m("tr", { style: { backgroundColor: data.color } }, [
-                      m("td", plant.name),
-                      m("td", data.interval_description),
-                      m("td", plant.windows),
-                      m("td", this.interval_timers[data.interval])
+                  .map((plant, i, a) =>
+                    m(`tr`, { style: { color: data.color } }, [
+                      m(dataTd(i, a), plant.name),
+                      m(dataTd(i, a), data.interval_description),
+                      m(dataTd(i, a), plant.windows),
+                      m(dataTd(i, a), this.interval_timers[data.interval])
                     ])
                   )
               )
           )
         ])
       ]),
-      m("p.signature", [
+      m("p.py-5", [
         "-bitwise | ",
         m("a", { href: "https://twitter.com/buttwize" }, "@buttwize")
       ])
     ]);
   }
 } as m.Component<{}, State>;
+
+const dataTd = (i: number, a: any[]): string =>
+  a.length - 1 === i ? "td.pb-4" : "td";
