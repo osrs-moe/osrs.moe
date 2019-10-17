@@ -1,0 +1,22 @@
+import m from "mithril";
+const Link = m.route.Link;
+
+const HEADER_LINK = "text-gray-200 hover:text-gray-400 hover:no-underline";
+
+export const Header = {
+  view: () =>
+    m(
+      "header.bg-gray-800.text-md",
+      m(".max-w-6xl.mx-auto", [
+        m(
+          Link,
+          {
+            href: "/",
+            class: `text-3xl ${HEADER_LINK} mx-4 my-1`
+          },
+          "osrs.moe"
+        ),
+        m(Link, { href: "/farmclock", class: `${HEADER_LINK}` }, "Farm Clock")
+      ])
+    )
+};

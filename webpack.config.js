@@ -1,17 +1,27 @@
 const path = require("path");
+const glob = require("glob");
 const webpack = require("webpack");
 const CssExtract = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
 const HtmlRuntimePlugin = require("html-webpack-inline-runtime-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const PATHS = {
   src: path.resolve(__dirname, "src"),
-  dist: path.resolve(__dirname, "dist")
+  dist: path.resolve(__dirname, "dist"),
+  static: path.resolve(__dirname, "static")
 };
 
 const URIS = {
   publicPath: "/"
+};
+
+const OPTIONS = {
+  purgecss: {
+    paths: glob.sync(`${PATHS.src}/**/*.ts`, { nodir: true })
+  }
 };
 
 module.exports = (_, opts) => {
@@ -40,17 +50,20 @@ module.exports = (_, opts) => {
           loaders: ["babel-loader", "ts-loader"]
         },
         {
-          test: /\.scss$/,
+          test: /\.css$/,
           use: [
             dev ? "style-loader" : CssExtract.loader,
-            { loader: "css-loader", options: { importLoaders: 2 } },
+            { loader: "css-loader", options: { importLoaders: 1 } },
             {
               loader: "postcss-loader",
               options: {
-                plugins: [require("autoprefixer"), require("cssnano")]
+                plugins: [
+                  require("tailwindcss"),
+                  require("autoprefixer"),
+                  require("cssnano")
+                ]
               }
-            },
-            "sass-loader"
+            }
           ]
         }
       ]
@@ -58,9 +71,11 @@ module.exports = (_, opts) => {
     plugins: [
       dev ? null : new CleanWebpackPlugin(),
       new webpack.HashedModuleIdsPlugin(),
-      dev ? null : new CssExtract(),
+      dev ? null : new CssExtract({ filename: "[name].[contenthash].css" }),
       new HtmlPlugin({ title: "osrs.moe" }),
-      dev ? null : new HtmlRuntimePlugin()
+      dev ? null : new HtmlRuntimePlugin(),
+      dev ? null : new PurgecssPlugin(OPTIONS.purgecss),
+      dev ? null : new CopyPlugin([{ from: PATHS.static, to: PATHS.dist }])
     ].filter(Boolean)
   };
 };
