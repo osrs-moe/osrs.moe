@@ -1,10 +1,12 @@
 const path = require("path");
+const glob = require("glob");
 const webpack = require("webpack");
 const CssExtract = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
 const HtmlRuntimePlugin = require("html-webpack-inline-runtime-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const PATHS = {
   src: path.resolve(__dirname, "src"),
@@ -14,6 +16,12 @@ const PATHS = {
 
 const URIS = {
   publicPath: "/"
+};
+
+const OPTIONS = {
+  purgecss: {
+    paths: glob.sync(`${PATHS.src}/**/*.ts`, { nodir: true })
+  }
 };
 
 module.exports = (_, opts) => {
@@ -32,7 +40,7 @@ module.exports = (_, opts) => {
     optimization: {
       runtimeChunk: "single",
       splitChunks: {
-        chunks: "all",
+        chunks: "all"
       }
     },
     module: {
@@ -63,9 +71,10 @@ module.exports = (_, opts) => {
     plugins: [
       dev ? null : new CleanWebpackPlugin(),
       new webpack.HashedModuleIdsPlugin(),
-      dev ? null : new CssExtract({filename: "[name].[contenthash].css"}),
+      dev ? null : new CssExtract({ filename: "[name].[contenthash].css" }),
       new HtmlPlugin({ title: "osrs.moe" }),
       dev ? null : new HtmlRuntimePlugin(),
+      dev ? null : new PurgecssPlugin(OPTIONS.purgecss),
       dev ? null : new CopyPlugin([{ from: PATHS.static, to: PATHS.dist }])
     ].filter(Boolean)
   };
