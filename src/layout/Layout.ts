@@ -1,6 +1,6 @@
 import m from "mithril";
 const Link = m.route.Link;
-import "./layout.scss";
+import "./layout.css";
 
 export const Layout = {
   view: (vnode: m.Vnode) =>

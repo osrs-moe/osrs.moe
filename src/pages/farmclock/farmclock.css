@@ -1,0 +1,8 @@
+.plantdata td {
+  text-align: center;
+}
+
+.plantdata tbody td {
+  color: black;
+  background-color: inherit;
+}

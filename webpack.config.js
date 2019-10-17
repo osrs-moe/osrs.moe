@@ -32,7 +32,7 @@ module.exports = (_, opts) => {
     optimization: {
       runtimeChunk: "single",
       splitChunks: {
-        chunks: "all"
+        chunks: "all",
       }
     },
     module: {
@@ -42,17 +42,20 @@ module.exports = (_, opts) => {
           loaders: ["babel-loader", "ts-loader"]
         },
         {
-          test: /\.scss$/,
+          test: /\.css$/,
           use: [
             dev ? "style-loader" : CssExtract.loader,
-            { loader: "css-loader", options: { importLoaders: 2 } },
+            { loader: "css-loader", options: { importLoaders: 1 } },
             {
               loader: "postcss-loader",
               options: {
-                plugins: [require("autoprefixer"), require("cssnano")]
+                plugins: [
+                  require("tailwindcss"),
+                  require("autoprefixer"),
+                  require("cssnano")
+                ]
               }
-            },
-            "sass-loader"
+            }
           ]
         }
       ]
@@ -60,7 +63,7 @@ module.exports = (_, opts) => {
     plugins: [
       dev ? null : new CleanWebpackPlugin(),
       new webpack.HashedModuleIdsPlugin(),
-      dev ? null : new CssExtract(),
+      dev ? null : new CssExtract({filename: "[name].[contenthash].css"}),
       new HtmlPlugin({ title: "osrs.moe" }),
       dev ? null : new HtmlRuntimePlugin(),
       dev ? null : new CopyPlugin([{ from: PATHS.static, to: PATHS.dist }])

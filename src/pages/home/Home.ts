@@ -1,6 +1,6 @@
 import m from "mithril";
 const Link = m.route.Link;
-import "./home.scss";
+import "./home.css";
 
 export const Home = {
   view: () =>

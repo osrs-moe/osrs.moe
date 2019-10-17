@@ -1,6 +1,6 @@
 import m from "mithril";
 import plant_data, { PlantData } from "./plant_data";
-import "./farmclock.scss";
+import "./farmclock.css";
 import * as farmclock from "./logic";
 
 const _second = 1000;
