@@ -20,7 +20,7 @@ const URIS = {
 
 const OPTIONS = {
   purgecss: {
-    paths: glob.sync(`${PATHS.src}/**/*.ts`, { nodir: true })
+    paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
   }
 };
 
@@ -72,7 +72,7 @@ module.exports = (_, opts) => {
       dev ? null : new CleanWebpackPlugin(),
       new webpack.HashedModuleIdsPlugin(),
       dev ? null : new CssExtract({ filename: "[name].[contenthash].css" }),
-      new HtmlPlugin({ title: "osrs.moe" }),
+      new HtmlPlugin(),
       dev ? null : new HtmlRuntimePlugin(),
       dev ? null : new PurgecssPlugin(OPTIONS.purgecss),
       dev ? null : new CopyPlugin([{ from: PATHS.static, to: PATHS.dist }])
