@@ -72,7 +72,7 @@ module.exports = (_, opts) => {
       dev ? null : new CleanWebpackPlugin(),
       new webpack.HashedModuleIdsPlugin(),
       dev ? null : new CssExtract({ filename: "[name].[contenthash].css" }),
-      new HtmlPlugin(),
+      new HtmlPlugin({ template: path.resolve(PATHS.src, "index.html") }),
       dev ? null : new HtmlRuntimePlugin(),
       dev ? null : new PurgecssPlugin(OPTIONS.purgecss),
       dev ? null : new CopyPlugin([{ from: PATHS.static, to: PATHS.dist }])
