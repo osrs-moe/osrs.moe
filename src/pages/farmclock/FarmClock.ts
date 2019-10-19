@@ -75,7 +75,7 @@ export default {
     farmclock.stop();
   },
   view() {
-    return m(".flex.flex-col.items-center", [
+    return m("section.h-full.flex.flex-col.items-center", [
       m("canvas#farmclock_canvas"),
       m(".flex-1.flex.items-center", [
         m("table.text-center.my-auto", [
