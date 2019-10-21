@@ -1,7 +1,7 @@
 import m from "mithril";
 import { MacroForm } from "./MacroForm";
 import { MacroResult } from "./MacroResult";
-import {Calculator} from "../Calculators";
+import { Calculator } from "../Calculators";
 
 export interface Rate {
   start: number;

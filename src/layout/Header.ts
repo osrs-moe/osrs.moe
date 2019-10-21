@@ -17,11 +17,7 @@ export const Header = {
           "osrs.moe"
         ),
         m(Link, { href: "/farmclock", class: HEADER_LINK }, "Farm Clock"),
-        m(
-          Link,
-          { href: "/calculators", class: HEADER_LINK },
-          "Calculators"
-        )
+        m(Link, { href: "/calculators", class: HEADER_LINK }, "Calculators")
       ])
     )
 };

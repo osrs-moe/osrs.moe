@@ -27,14 +27,10 @@ const Error: m.Component<Attrs> = {
 const Success: m.Component<Attrs> = {
   view: ({ attrs }) => {
     const firstHours = hoursToGoal(attrs.first, attrs.second);
-    const firstXp =
-      attrs.first.start + firstHours * attrs.first.base
-    ;
+    const firstXp = attrs.first.start + firstHours * attrs.first.base;
 
     const secondHours = hoursToGoal(attrs.second, attrs.first);
-    const secondXp =
-      attrs.second.start + secondHours * attrs.second.base
-    ;
+    const secondXp = attrs.second.start + secondHours * attrs.second.base;
 
     return [
       m(
@@ -67,7 +63,7 @@ const Success: m.Component<Attrs> = {
   }
 };
 
-const fmtInt = (n: number) => Math.round(n).toLocaleString()
+const fmtInt = (n: number) => Math.round(n).toLocaleString();
 
 const hoursToGoal = (first: Rate, second: Rate) =>
   (first.goal * second.base -
