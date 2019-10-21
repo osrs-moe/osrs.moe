@@ -6,7 +6,6 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
 const HtmlRuntimePlugin = require("html-webpack-inline-runtime-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const PATHS = {
   src: path.resolve(__dirname, "src"),
@@ -18,11 +17,10 @@ const URIS = {
   publicPath: "/"
 };
 
-const OPTIONS = {
-  purgecss: {
-    paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
-  }
-};
+const purgecss = require("@fullhuman/postcss-purgecss")({
+  defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+  content: ["./src/**/*.html", "./src/**/*.ts"]
+});
 
 module.exports = (_, opts) => {
   const dev = opts.mode !== "production";
@@ -60,6 +58,7 @@ module.exports = (_, opts) => {
                 plugins: [
                   require("tailwindcss"),
                   require("autoprefixer"),
+                  ...(dev ? [] : [purgecss]),
                   require("cssnano")
                 ]
               }
@@ -74,7 +73,6 @@ module.exports = (_, opts) => {
       dev ? null : new CssExtract({ filename: "[name].[contenthash].css" }),
       new HtmlPlugin({ template: path.resolve(PATHS.src, "index.html") }),
       dev ? null : new HtmlRuntimePlugin(),
-      dev ? null : new PurgecssPlugin(OPTIONS.purgecss),
       dev ? null : new CopyPlugin([{ from: PATHS.static, to: PATHS.dist }])
     ].filter(Boolean)
   };
