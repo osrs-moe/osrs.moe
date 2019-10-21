@@ -7,3 +7,13 @@
 
 /* Utilities */
 @import "~tailwindcss/dist/utilities.css";
+
+.unlink {
+    @apply no-underline;
+    color: inherit;
+}
+
+.unlink:hover {
+    @apply no-underline;
+    color: inherit;
+}
