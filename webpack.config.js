@@ -44,7 +44,7 @@ module.exports = (_, opts) => {
       rules: [
         {
           test: /\.ts$/,
-          loaders: ["babel-loader", "ts-loader"]
+          use: ["babel-loader", "ts-loader"]
         },
         {
           test: /\.css$/,
