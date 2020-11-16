@@ -48,7 +48,7 @@ export const MacroForm: m.Component<Attrs, State> = {
           id: `${attrs.prefix}-rate-goal`,
           placeholder: 200_000_000,
           oninput: setGoal.bind(state),
-          class: `my-2 ${INPUT_STYLE} ${attrs.goalClass}`
+          class: `my-2 ${INPUT_STYLE} ${attrs.goalClass}`,
         },
         "Goal XP"
       ),
@@ -58,7 +58,7 @@ export const MacroForm: m.Component<Attrs, State> = {
           id: `${attrs.prefix}-rate-start`,
           placeholder: 13_034_431,
           oninput: setStart.bind(state),
-          class: `my-2 ${INPUT_STYLE} ${attrs.startClass}`
+          class: `my-2 ${INPUT_STYLE} ${attrs.startClass}`,
         },
         "Start XP"
       ),
@@ -68,7 +68,7 @@ export const MacroForm: m.Component<Attrs, State> = {
           id: `${attrs.prefix}-rate-base`,
           placeholder: 100_000,
           oninput: setBase.bind(state),
-          class: `my-2 ${INPUT_STYLE} ${attrs.baseClass}`
+          class: `my-2 ${INPUT_STYLE} ${attrs.baseClass}`,
         },
         "XP/HR"
       ),
@@ -79,11 +79,11 @@ export const MacroForm: m.Component<Attrs, State> = {
           id: `${attrs.prefix}-rate-extra`,
           placeholder: 10_000,
           oninput: setExtra.bind(state),
-          class: `my-2 ${INPUT_STYLE} ${attrs.extraClass}`
+          class: `my-2 ${INPUT_STYLE} ${attrs.extraClass}`,
         },
         "Bonus XP/HR"
-      )
-    ])
+      ),
+    ]),
 };
 
 const RateInput: m.Component<any> = {
@@ -92,7 +92,7 @@ const RateInput: m.Component<any> = {
       "label",
       {
         for: attrs.id,
-        class: LABEL_STYLE
+        class: LABEL_STYLE,
       },
       children
     ),
@@ -100,9 +100,9 @@ const RateInput: m.Component<any> = {
       type: "number",
       max: 200_000_000,
       min: 0,
-      ...attrs
-    })
-  ]
+      ...attrs,
+    }),
+  ],
 };
 
 interface InputEvent {

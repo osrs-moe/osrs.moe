@@ -31,15 +31,15 @@ export const Macro: m.Component<{}, State> & Calculator = {
     m("main.h-full.flex.flex-col", [
       m(".flex.flex-col.sm:flex-row.self-center.my-4", [
         m(MacroForm, { prefix: "left", rate: state.first }, "First Skill"),
-        m(MacroForm, { prefix: "right", rate: state.second }, "Second Skill")
+        m(MacroForm, { prefix: "right", rate: state.second }, "Second Skill"),
       ]),
-      m(MacroResult, { ...state })
-    ])
+      m(MacroResult, { ...state }),
+    ]),
 };
 
 const defaultRate = (): Rate => ({
   start: 13_034_431,
   goal: 200_000_000,
   base: 100_000,
-  extra: 10_000
+  extra: 10_000,
 });

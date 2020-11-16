@@ -7,7 +7,7 @@ import { Calculators } from "./pages/calculators/Calculators";
 
 const route = <A, S>(component: m.ComponentTypes<A, S>) => ({
   onmatch: () => component,
-  render: (vnode: m.Vnode<A, S>) => m(Layout, vnode)
+  render: (vnode: m.Vnode<A, S>) => m(Layout, vnode),
 });
 
 export const router = {
@@ -17,5 +17,5 @@ export const router = {
   "/calculators": route(Calculators),
   [Calculators.Macro.url]: route(Calculators.Macro),
 
-  "/:404...": route(NotFound)
+  "/:404...": route(NotFound),
 };

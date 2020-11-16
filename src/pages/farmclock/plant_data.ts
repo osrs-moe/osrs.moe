@@ -22,33 +22,33 @@ export default [
     plants: [
       {
         name: "Potato",
-        windows: 4
+        windows: 4,
       },
       {
         name: "Onion",
-        windows: 4
+        windows: 4,
       },
       {
         name: "Cabbage",
-        windows: 4
+        windows: 4,
       },
       {
         name: "Tomato",
-        windows: 4
+        windows: 4,
       },
       {
         name: "Sweetcorn",
-        windows: 5
+        windows: 5,
       },
       {
         name: "Strawberry",
-        windows: 6
+        windows: 6,
       },
       {
         name: "Watermelon",
-        windows: 7
-      }
-    ]
+        windows: 7,
+      },
+    ],
   },
   {
     interval: 20 * minute,
@@ -57,37 +57,37 @@ export default [
     plants: [
       {
         name: "White Lilly",
-        windows: 4
+        windows: 4,
       },
       {
         name: "Redberry",
-        windows: 5
+        windows: 5,
       },
       {
         name: "Cadavaberry",
-        windows: 6
+        windows: 6,
       },
       {
         name: "Dwellberry",
-        windows: 7
+        windows: 7,
       },
       {
         name: "Cadavaberry",
-        windows: 8
+        windows: 8,
       },
       {
         name: "Whiteberry",
-        windows: 8
+        windows: 8,
       },
       {
         name: "Poison Ivy",
-        windows: 8
+        windows: 8,
       },
       {
         name: "Herbs",
-        windows: 4
-      }
-    ]
+        windows: 4,
+      },
+    ],
   },
   {
     interval: 40 * minute,
@@ -96,29 +96,29 @@ export default [
     plants: [
       {
         name: "Bittercap Mushroom",
-        windows: 6
+        windows: 6,
       },
       {
         name: "Oak Tree",
-        windows: 4
+        windows: 4,
       },
       {
         name: "Willow Tree",
-        windows: 5
+        windows: 5,
       },
       {
         name: "Maple Tree",
-        windows: 7
+        windows: 7,
       },
       {
         name: "Yew Tree",
-        windows: 9
+        windows: 9,
       },
       {
         name: "Magic Tree",
-        windows: 11
-      }
-    ]
+        windows: 11,
+      },
+    ],
   },
   {
     interval: 80 * minute,
@@ -127,17 +127,17 @@ export default [
     plants: [
       {
         name: "Morchella Mushroom",
-        windows: 3
+        windows: 3,
       },
       {
         name: "Belladonna",
-        windows: 3
+        windows: 3,
       },
       {
         name: "Cactus",
-        windows: 7
-      }
-    ]
+        windows: 7,
+      },
+    ],
   },
   {
     interval: 160 * minute,
@@ -146,13 +146,13 @@ export default [
     plants: [
       {
         name: "Fruit Trees",
-        windows: 6
+        windows: 6,
       },
       {
         name: "Calquat Trees",
-        windows: 8
-      }
-    ]
+        windows: 8,
+      },
+    ],
   } /*,
 	{
 		interval: 320 * minute,
@@ -162,5 +162,5 @@ export default [
 				windows: 11
 			}
 		]
-	}*/
+	}*/,
 ] as PlantData[];

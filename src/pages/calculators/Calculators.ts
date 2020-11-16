@@ -10,11 +10,11 @@ export interface Calculator {
 export const Calculators = {
   view: () =>
     m("main.flex.flex-wrap.max-w-lg", [
-      m(Calc, { title: "Macro Efficiency", calc: Macro })
+      m(Calc, { title: "Macro Efficiency", calc: Macro }),
     ]),
 
   // child modules
-  Macro
+  Macro,
 };
 
 interface Attrs {
@@ -26,6 +26,6 @@ const Calc: m.Component<Attrs> = {
   view: ({ attrs }) =>
     m(Link, { href: attrs.calc.url, class: "flex flex-col unlink" }, [
       m("h2.text-2xl", attrs.title),
-      m("p", attrs.calc.blurb)
-    ])
+      m("p", attrs.calc.blurb),
+    ]),
 };

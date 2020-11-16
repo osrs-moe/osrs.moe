@@ -111,7 +111,7 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
 
   const time_edges = {
     left: new Date(now.getTime() - 3 * 60 * 60 * 1000).getTime(),
-    right: new Date(now.getTime() + 3 * 60 * 60 * 1000).getTime()
+    right: new Date(now.getTime() + 3 * 60 * 60 * 1000).getTime(),
   };
 
   const five_minutes_left = new Date(

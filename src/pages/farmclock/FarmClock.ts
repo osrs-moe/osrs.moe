@@ -11,9 +11,9 @@ const slot_size = 5 * _minute;
 type TimerIntervals = { [key: number]: string };
 
 function create_timer_update(timers: TimerIntervals, plant_data: PlantData[]) {
-  const intervals = plant_data.map(data => data.interval);
-  return function() {
-    intervals.forEach(interval => {
+  const intervals = plant_data.map((data) => data.interval);
+  return function () {
+    intervals.forEach((interval) => {
       timers[interval] = get_window_time_difference(interval);
     });
     m.redraw();
@@ -84,15 +84,15 @@ export default {
               m(`td.p-4`, "Plants"),
               m(`td.p-4`, "Growth Window Time"),
               m(`td.p-4`, "Growth Windows"),
-              m(`td.p-4`, "Time to Next Window")
-            ])
+              m(`td.p-4`, "Time to Next Window"),
+            ]),
           ]),
           m(
             "tbody.text-gray-900",
             plant_data
               .slice()
               .reverse()
-              .map(data =>
+              .map((data) =>
                 data.plants
                   .slice()
                   .reverse()
@@ -101,19 +101,19 @@ export default {
                       m(dataTd(i, a), plant.name),
                       m(dataTd(i, a), data.interval_description),
                       m(dataTd(i, a), plant.windows),
-                      m(dataTd(i, a), this.interval_timers[data.interval])
+                      m(dataTd(i, a), this.interval_timers[data.interval]),
                     ])
                   )
               )
-          )
-        ])
+          ),
+        ]),
       ]),
       m("p.py-5", [
         "-bitwise | ",
-        m("a", { href: "https://twitter.com/buttwize" }, "@buttwize")
-      ])
+        m("a", { href: "https://twitter.com/buttwize" }, "@buttwize"),
+      ]),
     ]);
-  }
+  },
 } as m.Component<{}, State>;
 
 const dataTd = (i: number, a: any[]): string =>

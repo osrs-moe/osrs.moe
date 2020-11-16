@@ -11,7 +11,7 @@ export const Home = {
           m(Link, { href: "/" }, "osrs.moe"),
           ". There isn't much here I just wanted to make a ",
           m(Link, { href: "/farmclock" }, "farm clock"),
-          " since indecentcode's went down."
+          " since indecentcode's went down.",
         ]),
         m("p.mb-1", [
           "This project is ",
@@ -20,12 +20,12 @@ export const Home = {
             { href: "https://github.com/osrs-moe/osrs_moe" },
             "open source"
           ),
-          "."
+          ".",
         ]),
         m("p", [
           "-bitwise | ",
-          m(Link, { href: "https://twitter.com/buttwize" }, "@buttwize")
-        ])
+          m(Link, { href: "https://twitter.com/buttwize" }, "@buttwize"),
+        ]),
       ])
-    )
+    ),
 };

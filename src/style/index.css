@@ -1,12 +1,7 @@
-/* Base Styles */
-@import "~tailwindcss/dist/base.css";
-@import "base.css";
-
-/* Components */
-@import "~tailwindcss/dist/components.css";
-
-/* Utilities */
-@import "~tailwindcss/dist/utilities.css";
+@import "tailwindcss/base";
+@import "./base.css";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 .unlink {
   @apply no-underline;
