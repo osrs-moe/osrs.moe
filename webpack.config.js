@@ -1,77 +1,75 @@
 const path = require("path");
-const glob = require("glob");
-const webpack = require("webpack");
 const CssExtract = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
-const HtmlRuntimePlugin = require("html-webpack-inline-runtime-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
-const PATHS = {
-  src: path.resolve(__dirname, "src"),
-  dist: path.resolve(__dirname, "dist"),
-  static: path.resolve(__dirname, "static")
-};
+const dev = process.env.NODE_ENV !== "production";
+process.traceDeprecation = true;
 
-const URIS = {
-  publicPath: "/"
-};
-
-const purgecss = require("@fullhuman/postcss-purgecss")({
-  defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-  content: ["./src/**/*.html", "./src/**/*.ts"]
-});
-
-module.exports = (_, opts) => {
-  const dev = opts.mode !== "production";
-
-  return {
-    mode: dev ? "development" : "production",
-    output: {
-      path: PATHS.dist,
-      filename: "[name].[contenthash].js",
-      publicPath: URIS.publicPath
+module.exports = {
+  mode: dev ? "development" : "production",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+    publicPath: "/",
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  optimization: {
+    minimizer: ["...", new CssMinimizerPlugin()],
+    runtimeChunk: "single",
+    splitChunks: {
+      chunks: "all",
     },
-    resolve: {
-      extensions: [".ts", ".js"]
-    },
-    optimization: {
-      runtimeChunk: "single",
-      splitChunks: {
-        chunks: "all"
-      }
-    },
-    module: {
-      rules: [
-        {
-          test: /\.ts$/,
-          use: ["babel-loader", "ts-loader"]
-        },
-        {
-          test: /\.css$/,
-          use: [
-            dev ? "style-loader" : CssExtract.loader,
-            { loader: "css-loader", options: { importLoaders: 1 } },
-            {
-              loader: "postcss-loader",
-              options: {
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: ["babel-loader", "ts-loader"],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          CssExtract.loader,
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
                 plugins: [
-                  require("tailwindcss"),
+                  require("postcss-import"),
+                  require("tailwindcss")({
+                    future: {
+                      defaultLineHeights: true,
+                      purgeLayersByDefault: true,
+                      removeDeprecatedGapUtilities: true,
+                      standardFontWeights: true,
+                    },
+                    purge: {
+                      content: [
+                        "./src/**/*.html",
+                        "./src/**/*.css",
+                        "./src/**/*.ts",
+                      ],
+                    },
+                  }),
                   require("autoprefixer"),
-                  ...(dev ? [] : [purgecss]),
-                  require("cssnano")
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    plugins: [
-      dev ? null : new CleanWebpackPlugin(),
-      new webpack.HashedModuleIdsPlugin(),
-      dev ? null : new CssExtract({ filename: "[name].[contenthash].css" }),
-      new HtmlPlugin({ template: path.resolve(PATHS.src, "index.html") }),
-      dev ? null : new HtmlRuntimePlugin(),
-    ].filter(Boolean)
-  };
+                ],
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+  plugins: [
+    dev ? null : new CleanWebpackPlugin(),
+    dev ? null : new CssExtract({ filename: "[name].[contenthash].css" }),
+    new HtmlPlugin({
+      template: path.resolve(__dirname, "src", "index.html"),
+    }),
+  ].filter(Boolean),
 };
