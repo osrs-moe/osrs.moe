@@ -5,7 +5,6 @@ const CssExtract = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
 const HtmlRuntimePlugin = require("html-webpack-inline-runtime-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 const PATHS = {
   src: path.resolve(__dirname, "src"),
@@ -73,7 +72,6 @@ module.exports = (_, opts) => {
       dev ? null : new CssExtract({ filename: "[name].[contenthash].css" }),
       new HtmlPlugin({ template: path.resolve(PATHS.src, "index.html") }),
       dev ? null : new HtmlRuntimePlugin(),
-      dev ? null : new CopyPlugin([{ from: PATHS.static, to: PATHS.dist }])
     ].filter(Boolean)
   };
 };
