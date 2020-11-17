@@ -5,6 +5,7 @@ const minute = 60 * second;
 export interface PlantData {
   interval: number;
   interval_description: string;
+  botanist_description: string;
   color: string;
   plants: {
     name: string;
@@ -18,6 +19,7 @@ export default [
   {
     interval: 10 * minute,
     interval_description: "10m",
+    botanist_description: "2m",
     color: "#a55ca5",
     plants: [
       {
@@ -53,6 +55,7 @@ export default [
   {
     interval: 20 * minute,
     interval_description: "20m",
+    botanist_description: "4m",
     color: "#67b6c7",
     plants: [
       {
@@ -92,6 +95,7 @@ export default [
   {
     interval: 40 * minute,
     interval_description: "40m",
+    botanist_description: "8m",
     color: "#bccd7a",
     plants: [
       {
@@ -123,6 +127,7 @@ export default [
   {
     interval: 80 * minute,
     interval_description: "1h 20m",
+    botanist_description: "16m",
     color: "#eb9743",
     plants: [
       {
@@ -142,6 +147,7 @@ export default [
   {
     interval: 160 * minute,
     interval_description: "2h 40m",
+    botanist_description: "32m",
     color: "#ff24f2",
     plants: [
       {

@@ -1,17 +1,21 @@
 import plant_data from "./plant_data";
 import { debounce } from "lodash";
+import { minute_per_slot, slot_size, interval } from "./FarmClock";
 
 let run = false;
+let botanist = false;
 
 const _second = 1000;
 const _minute = _second * 60;
 const fps = 60;
-const view_interval = 360 * _minute; // in milliseconds
-const slot_size = 5 * _minute; // slot size in milliseconds
 const colors = ["#a55ca5", "#67b6c7", "#bccd7a", "#eb9743", "#ff24f2"];
 const grid_color = "#eeeeee";
 const center_color = "#00ff00";
 const time_color = "#eeeeee";
+
+function view_interval(botanist: boolean): number {
+  return (botanist ? 72 : 360) * _minute;
+}
 
 function get_page_width_without_scrollbar() {
   return document.documentElement.clientWidth - 1;
@@ -105,17 +109,22 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
   const midnight = new Date();
   midnight.setUTCHours(0, 0, 0, 0);
 
-  const ms_per_pixel = view_interval / width;
-  const pixels_per_slot = slot_size / ms_per_pixel;
+  const _slot_size = slot_size(botanist);
+  const ms_per_pixel = view_interval(botanist) / width;
+  const pixels_per_slot = _slot_size / ms_per_pixel;
   const slots = Math.ceil(width / pixels_per_slot) + 1; // add a single slot for overlap
 
   const time_edges = {
-    left: new Date(now.getTime() - 3 * 60 * 60 * 1000).getTime(),
-    right: new Date(now.getTime() + 3 * 60 * 60 * 1000).getTime(),
+    left: new Date(
+      now.getTime() - 3 * 60 * 60 * (200 * minute_per_slot(botanist))
+    ).getTime(),
+    right: new Date(
+      now.getTime() + 3 * 60 * 60 * (200 * minute_per_slot(botanist))
+    ).getTime(),
   };
 
   const five_minutes_left = new Date(
-    Math.floor(time_edges.left / slot_size) * slot_size
+    Math.floor(time_edges.left / _slot_size) * _slot_size
   );
   const left_edge =
     (five_minutes_left.getTime() - time_edges.left) / ms_per_pixel;
@@ -123,12 +132,15 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
   const start_ms = five_minutes_left.getTime();
 
   for (let i = 0; i < slots; i++) {
-    const slot_time = start_ms + slot_size * i;
+    const slot_time = start_ms + _slot_size * i;
     const ms_since_midnight = slot_time - midnight.getTime();
     const x = left_edge + pixels_per_slot * i;
 
     for (let ii = 0; ii < plant_data.length; ii++) {
-      if (Math.abs(ms_since_midnight % plant_data[ii].interval) >= slot_size) {
+      if (
+        Math.abs(ms_since_midnight % interval(plant_data[ii], botanist)) >=
+        _slot_size
+      ) {
         continue;
       }
 
@@ -144,8 +156,8 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
         colors[ii % colors.length]
       );
 
-      // 20 minutes
-      if (plant_data[ii].interval === 1200000) {
+      // time marker interval
+      if (interval(plant_data[ii], botanist) === _slot_size * 4) {
         const time = new Date(slot_time);
         const time_string =
           ("0" + time.getUTCHours()).slice(-2) +
@@ -188,8 +200,10 @@ function draw(ctx: CanvasRenderingContext2D, redraw = false) {
 const resize_limiter = debounce(size_canvas, 50);
 
 export const resize_canvas: EventListener = () => resize_limiter();
-export const start = () => {
+export const set_botanist = (_botanist: boolean) => (botanist = _botanist);
+export const start = (_botanist: boolean) => {
   run = true;
+  botanist = _botanist;
   size_canvas(true);
 };
 export const stop = () => (run = false);
